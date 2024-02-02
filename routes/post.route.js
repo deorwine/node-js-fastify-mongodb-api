@@ -10,12 +10,12 @@ module.exports = [
   },
   {
     method: "GET",
-    url: "post/:post_id",
+    url: "posts/:post_id",
     handler: PostController.getPostById,
   },
   {
     method: "POST",
-    url: "post",
+    url: "posts",
     preHandler: [
       (request, reply, next) => {
         request.query = helpers.validateInputs(
@@ -30,7 +30,7 @@ module.exports = [
   },
   {
     method: "PUT",
-    url: "post/:post_id",
+    url: "posts/:post_id",
     preHandler: [
       (request, reply, next) => {
         request.query = helpers.validateInputs(
@@ -45,12 +45,12 @@ module.exports = [
   },
   {
     method: "DELETE",
-    url: "post/:post_id",
+    url: "posts/:post_id",
     handler: PostController.deletePostById,
   },
   {
     method: "POST",
-    url: "post/:post_id/rating",
+    url: "posts/:post_id/rating",
     preHandler: [
       (request, reply, next) => {
         request.query = helpers.validateInputs(
