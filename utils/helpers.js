@@ -116,7 +116,7 @@ exports.sendTextMessage = (template = "") => {
     entityid: `${global.TEXT_ENTITY_ID}`,
     templateid: `${global.TEXT_TEMPLATE_ID}`,
   };
-  axios
+  return axios
     .post("https://api.grow-infinity.io/api/jsms", configData, {
       headers: {
         "Content-Type": "application/json",
