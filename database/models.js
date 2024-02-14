@@ -28,7 +28,7 @@ const webhookSchema = new Schema(
   {
     source : String, // admitad, flipkart
     type : String, // program, action
-    values: String,
+    values: Object,
   },
   {
     toObject: { virtuals: true },
