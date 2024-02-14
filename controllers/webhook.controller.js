@@ -94,6 +94,7 @@ exports.addWebhook = (request, reply) => {
     .create(data)
     .then(() => {
       if (request.params.source == "admitad") {
+        console.log("Text alert triggered.")
         helpers.sendTextMessage(
           "Hi handler, we received a new webhook from admitad. Please have a look. Avasar (Bot)"
         );

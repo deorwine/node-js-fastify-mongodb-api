@@ -108,25 +108,23 @@ exports.getDataWithPaginationData = (data, pagination) => {
 };
 
 exports.sendTextMessage = (template = "") => {
+  let configData = {
+    key: global.TEXT_KEY,
+    to: "7976609630",
+    from: "EXPLTS",
+    body: template,
+    entityid: `${global.TEXT_ENTITY_ID}`,
+    templateid: `${global.TEXT_TEMPLATE_ID}`,
+  };
   axios
-    .post(
-      "https://api.grow-infinity.io/api/jsms",
-      {
-        key: global.TEXT_KEY,
-        to: "7976609630",
-        from: "EXPLTS",
-        body: template,
-        entityid: `${global.TEXT_ENTITY_ID}`,
-        templateid: `${global.TEXT_TEMPLATE_ID}`,
+    .post("https://api.grow-infinity.io/api/jsms", configData, {
+      headers: {
+        "Content-Type": "application/json",
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    })
     .then((response) => {
-      return response;
+      console.log("response", response);
+      console.log("configData", configData);
     })
     .catch((error) => {
       console.log(error);
