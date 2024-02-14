@@ -10,6 +10,9 @@ exports.messages = {
     success_post_deleted: "Post deleted successfully.",
     success_post_not_exist: "Post does not exist.",
     success_post_updated: "Post updated successfully.",
+    success_webhook_added: "Webhook added successfully.",
+    success_webhook_deleted: "Webhook deleted successfully.",
+    success_webhook_not_exist: "Webhook does not exist.",
     error_unknown:
       "Something went wrong. We cannot fulfill your request at the moment.",
   },

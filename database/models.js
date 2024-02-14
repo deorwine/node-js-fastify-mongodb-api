@@ -24,6 +24,19 @@ const postRatingSchema = new Schema(
   }
 );
 
+const webhookSchema = new Schema(
+  {
+    source : String, // admitad, flipkart
+    type : String, // program, action
+    values: String,
+  },
+  {
+    toObject: { virtuals: true },
+    timestamps: true,
+  }
+);
+
 //MODELS
 exports.post = mongoose.model("posts", postSchema);
 exports.postRating = mongoose.model("posts.ratings", postRatingSchema);
+exports.webhook = mongoose.model("webhooks", webhookSchema);
