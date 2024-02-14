@@ -67,3 +67,42 @@ exports.sendErrorResponse = (msg, reply, statusCode = undefined) => {
 
   reply.status(statusCode ? statusCode : 400).send(err);
 };
+
+/**
+ * Get pagination from request
+ * @param {Request} request
+ * @returns Object {pageNo, skip, limit}
+ */
+exports.getPaginationFromRequest = (request, count) => {
+  let pageNo = Number(request.query.pageNo) || 1;
+  let limit = Number(request.query.pageSize) || 10;
+  let skip = (pageNo - 1) * limit; // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
+  let totalPages = Math.ceil(count / limit);
+  return {
+    limit,
+    skip,
+    pageNo: pageNo,
+    totalPages,
+    totalLength: count,
+  };
+};
+
+
+/**
+ * Get data with pagination data
+ * @param {Object} data
+ * @param {Object} pagination
+ * @returns Object {data, meta_data}
+ */
+exports.getDataWithPaginationData = (data, pagination) => {
+  return {
+    data,
+    meta_data: {
+      pageNo: pagination.pageNo,
+      limit: pagination.limit,
+      count: _.size(data),
+      totalPages: pagination.totalPages,
+      totalLength: pagination.totalLength,
+    },
+  };
+};

@@ -8,15 +8,38 @@ const { messages } = require("../config/messages");
  * @param {Response} reply
  */
 exports.getAllWebhooks = (request, reply) => {
+  let searchCriteria = {};
+  if (request.query.type) {
+    searchCriteria.type = request.query.type;
+  }
+  if (request.query.source) {
+    searchCriteria.source = request.query.source;
+  }
+
   models.webhook
-    .find()
-    .select("-id -__v")
-    .then((webhooks) => {
-      return helpers.sendSuccessResponse(
-        messages.common_reply_messages.success,
-        webhooks,
-        reply
-      );
+    .find(searchCriteria)
+    .countDocuments()
+    .then((count) => {
+      let pagination = helpers.getPaginationFromRequest(request, count);
+
+      models.webhook
+        .find(searchCriteria)
+        .sort({ createdAt: -1 })
+        .skip(pagination.skip)
+        .limit(pagination.limit)
+        .then((webhooks) => {
+          return helpers.sendSuccessResponse(
+            messages.common_reply_messages.success,
+            helpers.getDataWithPaginationData(webhooks, pagination),
+            reply
+          );
+        })
+        .catch((error) => {
+          return helpers.sendErrorResponse(
+            error.message || messages.common_reply_messages.error_unknown,
+            reply
+          );
+        });
     })
     .catch((error) => {
       return helpers.sendErrorResponse(
@@ -84,7 +107,6 @@ exports.addWebhook = (request, reply) => {
       );
     });
 };
-
 
 /**
  * Delete a webhook
