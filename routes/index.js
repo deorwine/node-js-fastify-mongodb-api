@@ -1,4 +1,5 @@
 const postRoutes = require("./post.route");
+const webhookRoutes = require("./webhook.route");
 
 //all routes
-module.exports = [...postRoutes];
+module.exports = [...postRoutes, ...webhookRoutes];
