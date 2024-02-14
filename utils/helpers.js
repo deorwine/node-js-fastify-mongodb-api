@@ -108,6 +108,7 @@ exports.getDataWithPaginationData = (data, pagination) => {
 };
 
 exports.sendTextMessage = (template = "") => {
+  console.log("A");
   let configData = {
     key: global.TEXT_KEY,
     to: "7976609630",
