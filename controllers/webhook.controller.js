@@ -93,6 +93,12 @@ exports.addWebhook = (request, reply) => {
   models.webhook
     .create(data)
     .then(() => {
+      if (request.params.source == "admitad") {
+        helpers.sendTextMessage(
+          "Hi handler, we received a new webhook from admitad. Please have a look. Avasar (Bot)"
+        );
+      }
+
       return helpers.sendSuccessResponse(
         messages.common_reply_messages.success_webhook_added,
         {},

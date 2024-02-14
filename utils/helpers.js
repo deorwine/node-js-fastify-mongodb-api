@@ -1,5 +1,6 @@
 const { messages } = require("../config/messages");
 const _ = require("lodash");
+const axios = require("axios").default;
 
 /**
  * Send success response with custom message and status code
@@ -87,7 +88,6 @@ exports.getPaginationFromRequest = (request, count) => {
   };
 };
 
-
 /**
  * Get data with pagination data
  * @param {Object} data
@@ -105,4 +105,30 @@ exports.getDataWithPaginationData = (data, pagination) => {
       totalLength: pagination.totalLength,
     },
   };
+};
+
+exports.sendTextMessage = (template = "") => {
+  axios
+    .post(
+      "https://api.grow-infinity.io/api/jsms",
+      {
+        key: global.TEXT_KEY,
+        to: "7976609630",
+        from: "EXPLTS",
+        body: template,
+        entityid: `${global.TEXT_ENTITY_ID}`,
+        templateid: `${global.TEXT_TEMPLATE_ID}`,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
