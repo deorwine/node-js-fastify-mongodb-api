@@ -94,9 +94,9 @@ exports.addWebhook = (request, reply) => {
     .create(data)
     .then(() => {
       if (request.params.source == "admitad") {
-        console.log("Text alert triggered.")
+        console.log("Text alert triggered.");
         helpers.sendTextMessage(
-          "Hi handler, we received a new webhook from admitad. Please have a look. Avasar (Bot)"
+          "Verify your mobile number using OTP: AVASAR_ADMITAD_NEW_WEBHOOK. This OTP is valid for 5 minutes. - ReachLocal Ads (Expletus)"
         );
       }
 
