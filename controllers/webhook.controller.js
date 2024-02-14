@@ -95,18 +95,25 @@ exports.addWebhook = (request, reply) => {
     .then(() => {
       if (request.params.source == "admitad") {
         console.log("Text alert triggered.");
-        (async () =>
+        (async () => {
           await helpers.sendTextMessage(
             "Verify your mobile number using OTP: AVASAR_ADMITAD_NEW_WEBHOOK. This OTP is valid for 5 minutes. - ReachLocal Ads (Expletus)"
-          ))();
+          );
+          return helpers.sendSuccessResponse(
+            messages.common_reply_messages.success_webhook_added,
+            {},
+            reply,
+            1
+          );
+        })();
+      } else {
+        return helpers.sendSuccessResponse(
+          messages.common_reply_messages.success_webhook_added,
+          {},
+          reply,
+          1
+        );
       }
-
-      return helpers.sendSuccessResponse(
-        messages.common_reply_messages.success_webhook_added,
-        {},
-        reply,
-        1
-      );
     })
     .catch((error) => {
       return helpers.sendErrorResponse(
