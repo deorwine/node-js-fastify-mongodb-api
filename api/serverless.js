@@ -74,7 +74,7 @@ require("dotenv").config();
 require("../config/global");
 require("../database");
 
-const fastify = require("fastify")({ logger: true });
+const fastify = require("fastify")({ logger: true, ignoreTrailingSlash: true });
 
 const corsOptions = {
   origin: "*",
