@@ -124,7 +124,7 @@ exports.sendTextMessage = (template = "") => {
       },
     })
     .then((response) => {
-      console.log("response", response);
+      console.log("response", response.data || response);
       console.log("configData", configData);
     })
     .catch((error) => {
