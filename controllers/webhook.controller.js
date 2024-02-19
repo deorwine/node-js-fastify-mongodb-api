@@ -89,6 +89,9 @@ exports.addWebhook = (request, reply) => {
     type: request.params.type,
     values: request.body || {},
   };
+  console.log("request.body", request.body);
+  console.log("request.query", request.query);
+  console.log("request.params", request.params);
 
   models.webhook
     .create(data)
