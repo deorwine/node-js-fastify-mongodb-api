@@ -22,7 +22,7 @@ module.exports = [
      * webhooks/admitad/actions
      * webhooks/admitad/programs
      */
-    url: "webhooks/:source/:type/",
+    url: "webhooks/:source/:type",
     handler: WebhookController.addWebhook,
   },
 ];
