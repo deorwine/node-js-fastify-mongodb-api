@@ -87,11 +87,12 @@ exports.addWebhook = (request, reply) => {
   let data = {
     source: request.params.source,
     type: request.params.type,
-    values: request.body || {},
+    values: {
+      body: request.body || {},
+      query: request.query || {},
+      params: request.params || {},
+    },
   };
-  console.log("request.body", request.body);
-  console.log("request.query", request.query);
-  console.log("request.params", request.params);
 
   models.webhook
     .create(data)
